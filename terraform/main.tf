@@ -62,3 +62,16 @@ data "oci_core_security_lists" "hoge" {
 output "hoge" {
   value = data.oci_core_security_lists.hoge
 }
+
+resource "oci_core_security_list" "egress_rule" {
+  compartment_id = var.OCID_COMPARTMENT
+  vcn_id         = var.OCID_VCN
+
+  egress_security_rules {
+    destination = "0.0.0.0/0"
+    protocol    = "all"
+
+    destination_type = "CIDR_BLOCK"
+    stateless        = false
+  }
+}
