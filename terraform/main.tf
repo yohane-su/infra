@@ -54,3 +54,11 @@ resource "oci_core_instance" "generated_oci_core_instance" {
     source_type             = "image"
   }
 }
+
+data "oci_core_security_lists" "hoge" {
+  compartment_id = var.OCID_COMPARTMENT
+}
+
+output "hoge" {
+  value = data.oci_core_security_lists.hoge
+}
