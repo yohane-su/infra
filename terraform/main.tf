@@ -71,6 +71,43 @@ output "current_vcns" {
   value = data.oci_core_vcns.hoge
 }
 
+data "oci_core_subnets" "hoge" {
+  compartment_id = var.OCID_COMPARTMENT
+}
+
+output "current_subnets" {
+  value = data.oci_core_subnets.hoge
+}
+
+resource "oci_core_subnet" "ubuntu_subnet" {
+  compartment_id = var.OCID_COMPARTMENT
+
+  vcn_id         = oci_core_vcn.ubuntu_vcn.id
+  cidr_block     = "10.0.0.0/24"
+  ipv6cidr_block = ""
+
+  dns_label                  = "subnet08240556"
+  prohibit_internet_ingress  = false
+  prohibit_public_ip_on_vnic = false
+
+  security_list_ids = [
+    oci_core_security_list.egress_rule.id,
+    oci_core_security_list.ingress_icmp.id,
+    oci_core_security_list.ingress_ssh.id,
+  ]
+}
+
+resource "oci_core_vcn" "ubuntu_vcn" {
+  compartment_id = var.OCID_COMPARTMENT
+
+  dns_label      = "vcn08240556"
+  is_ipv6enabled = false
+
+  cidr_blocks = [
+    "10.0.0.0/16"
+  ]
+}
+
 resource "oci_core_security_list" "egress_rule" {
   compartment_id = var.OCID_COMPARTMENT
   vcn_id         = var.OCID_VCN
