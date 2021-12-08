@@ -33,7 +33,7 @@ resource "oci_core_instance" "generated_oci_core_instance" {
   create_vnic_details {
     assign_private_dns_record = "true"
     assign_public_ip          = "true"
-    subnet_id                 = var.OCID_SUBNET
+    subnet_id                 = oci_core_subnet.ubuntu_subnet.id
   }
   display_name = "ubuntu-01"
   instance_options {
@@ -110,7 +110,7 @@ resource "oci_core_vcn" "ubuntu_vcn" {
 
 resource "oci_core_security_list" "egress_rule" {
   compartment_id = var.OCID_COMPARTMENT
-  vcn_id         = var.OCID_VCN
+  vcn_id         = oci_core_vcn.ubuntu_vcn.id
 
   egress_security_rules {
     destination = "0.0.0.0/0"
@@ -123,7 +123,7 @@ resource "oci_core_security_list" "egress_rule" {
 
 resource "oci_core_security_list" "ingress_icmp" {
   compartment_id = var.OCID_COMPARTMENT
-  vcn_id         = var.OCID_VCN
+  vcn_id         = oci_core_vcn.ubuntu_vcn.id
 
   ingress_security_rules {
     protocol    = "1"
@@ -151,7 +151,7 @@ resource "oci_core_security_list" "ingress_icmp" {
 
 resource "oci_core_security_list" "ingress_ssh" {
   compartment_id = var.OCID_COMPARTMENT
-  vcn_id         = var.OCID_VCN
+  vcn_id         = oci_core_vcn.ubuntu_vcn.id
 
   ingress_security_rules {
     protocol    = "6"
