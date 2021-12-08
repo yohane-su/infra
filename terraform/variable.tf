@@ -5,3 +5,4 @@ variable "OCID_PRIVATE_KEY" {}
 variable "OCID_COMPARTMENT" {}
 variable "OCID_SUBNET" {}
 variable "OCID_SOURCE" {}
+variable "OCID_VCN" {}
