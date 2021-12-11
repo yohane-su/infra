@@ -12,5 +12,5 @@ provider "oci" {
   tenancy_ocid = var.OCID_TENANCY
   user_ocid    = var.OCID_USER
   fingerprint  = var.OCID_FINGERPRINT
-  private_key_path  = var.OCID_PRIVATE_KEY_PATH
+  private_key  = var.OCID_PRIVATE_KEY
 }

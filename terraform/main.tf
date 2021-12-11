@@ -1,4 +1,11 @@
 terraform {
+  backend "remote" {
+    organization = "sksat"
+
+    workspaces {
+      name = "yohanesu-infra"
+    }
+  }
 }
 
 resource "oci_core_instance" "generated_oci_core_instance" {
