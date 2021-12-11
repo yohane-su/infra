@@ -86,22 +86,16 @@ resource "oci_core_instance" "x86_test" {
     ocpus         = 1
   }
   source_details {
-    boot_volume_size_in_gbs = "50"
-    source_id               = oci_core_image.x86_ubuntu_minimal.id
     source_type             = "image"
+    source_id               = lookup(data.oci_core_images.x86_ubuntu_minimal.images[0], "id")
+    boot_volume_size_in_gbs = "50"
   }
 }
 
-resource "oci_core_image" "x86_ubuntu_minimal" {
+data "oci_core_images" "x86_ubuntu_minimal" {
   compartment_id = var.OCID_COMPARTMENT
 
-  display_name = "x86 image"
-  launch_mode  = "NATIVE"
-
-  image_source_details {
-    source_type = "objectStorageTuple"
-
-    operating_system         = "Canonical Ubuntu"
-    operating_system_version = "20.04 Minimal"
-  }
+  operating_system         = "Canonical Ubuntu"
+  operating_system_version = "20.04 Minimal"
+  shape                    = "VM.Standard.E2.1.Micro"
 }
