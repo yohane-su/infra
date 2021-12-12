@@ -1,9 +1,9 @@
-resource "oci_core_instance" "generated_oci_core_instance" {
+resource "oci_core_instance" "a1flex_instance01" {
   compartment_id      = var.OCID_COMPARTMENT
   availability_domain = "dhYs:AP-TOKYO-1-AD-1"
   fault_domain        = "FAULT-DOMAIN-2"
 
-  display_name = "ubuntu-01"
+  display_name = "arm-ubuntu-01"
   shape        = "VM.Standard.A1.Flex"
 
   shape_config {
