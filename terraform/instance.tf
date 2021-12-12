@@ -39,9 +39,12 @@ resource "oci_core_instance" "generated_oci_core_instance" {
     ocpus         = "1"
   }
   source_details {
-    boot_volume_size_in_gbs = "50"
-    source_id               = var.OCID_SOURCE
     source_type             = "image"
+    boot_volume_size_in_gbs = "50"
+
+    # Ubuntu 20.04
+    # https://docs.oracle.com/en-us/iaas/images/image/51111a15-54e5-4af7-adb9-cea542248147/
+    source_id = "ocid1.image.oc1.ap-tokyo-1.aaaaaaaaxmfmyofygv4bmv533zrkpt5suie2cl5s5ajfx4f3dqv23c3vccpa"
   }
 }
 
