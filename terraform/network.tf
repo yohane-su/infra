@@ -1,7 +1,7 @@
 resource "oci_core_subnet" "ubuntu_subnet" {
   compartment_id = var.OCID_COMPARTMENT
 
-  vcn_id         = var.OCID_VCN
+  vcn_id         = oci_core_vcn.ubuntu_vcn.id
   cidr_block     = "10.0.0.0/24"
   ipv6cidr_block = ""
 
