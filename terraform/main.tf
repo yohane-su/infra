@@ -1,9 +1,9 @@
 terraform {
-  backend "remote" {
-    organization = "sksat"
+  #backend "remote" {
+  #  organization = "sksat"
 
-    workspaces {
-      name = "yohanesu-infra"
-    }
-  }
+  #  workspaces {
+  #    name = "yohanesu-infra"
+  #  }
+  #}
 }
