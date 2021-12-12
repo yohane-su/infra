@@ -23,7 +23,7 @@ resource "oci_core_instance" "generated_oci_core_instance" {
   create_vnic_details {
     assign_private_dns_record = "true"
     assign_public_ip          = "true"
-    subnet_id                 = oci_core_subnet.ubuntu_subnet.id
+    subnet_id                 = var.OCID_SUBNET
   }
   display_name = "ubuntu-01"
   instance_options {
