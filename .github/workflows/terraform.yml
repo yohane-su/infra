@@ -20,3 +20,10 @@ jobs:
       - name: check format
         working-directory: terraform
         run: terraform fmt -check -recursive
+
+      - name: tflint with reviewdog
+        uses: reviewdog/action-tflint@v1.13.0
+        with:
+          github_token: ${{ secrets.GITHUB_TOKEN }}
+          reporter: github-pr-review
+          fail_on_error: true
