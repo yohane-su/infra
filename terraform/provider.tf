@@ -23,3 +23,7 @@ provider "oci" {
 provider "cloudflare" {
   api_token = var.CF_DNS_TOKEN
 }
+
+data "cloudflare_zone" "yohanesu" {
+  name = "yohane.su"
+}

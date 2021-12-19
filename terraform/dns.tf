@@ -10,14 +10,14 @@ locals {
 }
 
 resource "cloudflare_record" "minecraft" {
-  zone_id = var.CF_ZONE_ID
+  zone_id = data.cloudflare_zone.yohanesu.id
   name    = "mc"
   type    = "A"
   value   = "45.76.188.189"
 }
 
 resource "cloudflare_record" "gh_pages" {
-  zone_id = var.CF_ZONE_ID
+  zone_id = data.cloudflare_zone.yohanesu.id
   name    = "yohane.su"
   type    = "A"
   proxied = true
