@@ -10,17 +10,19 @@ locals {
 }
 
 resource "cloudflare_record" "minecraft" {
-  zone_id = data.cloudflare_zone.yohanesu.id
-  name    = "mc"
-  type    = "A"
-  value   = "45.76.188.189"
+  zone_id         = data.cloudflare_zone.yohanesu.id
+  name            = "mc"
+  type            = "A"
+  value           = "45.76.188.189"
+  allow_overwrite = true
 }
 
 resource "cloudflare_record" "gh_pages" {
-  zone_id = data.cloudflare_zone.yohanesu.id
-  name    = "yohane.su"
-  type    = "A"
-  proxied = true
+  zone_id         = data.cloudflare_zone.yohanesu.id
+  name            = "yohane.su"
+  type            = "A"
+  proxied         = true
+  allow_overwrite = true
 
   for_each = toset(local.gh_pages_ips)
   value    = each.value
