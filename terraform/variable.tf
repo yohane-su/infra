@@ -6,3 +6,5 @@ variable "OCID_COMPARTMENT" {}
 variable "OCID_SUBNET" {}
 variable "OCID_SOURCE" {}
 variable "OCID_VCN" {}
+variable "CF_ZONE_ID" {}
+variable "CF_DNS_TOKEN" {}
