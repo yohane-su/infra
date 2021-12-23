@@ -17,6 +17,14 @@ resource "cloudflare_record" "minecraft" {
   allow_overwrite = true
 }
 
+resource "cloudflare_record" "minecraft2" {
+  zone_id         = data.cloudflare_zone.yohanesu.id
+  name            = "mc2"
+  type            = "A"
+  value           = oci_core_instance.a1flex_instance01.public_ip
+  allow_overwrite = true
+}
+
 resource "cloudflare_record" "gh_pages" {
   zone_id         = data.cloudflare_zone.yohanesu.id
   name            = "yohane.su"
