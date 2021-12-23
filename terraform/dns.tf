@@ -9,6 +9,13 @@ locals {
   ]
 }
 
+resource "cloudflare_record" "github_verify" {
+  zone_id = data.cloudflare_zone.yohanesu.id
+  name    = "_github-challenge-yohane-su"
+  type    = "TXT"
+  value   = "ea580f48b7"
+}
+
 resource "cloudflare_record" "minecraft" {
   zone_id         = data.cloudflare_zone.yohanesu.id
   name            = "mc"
