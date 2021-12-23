@@ -28,6 +28,7 @@ resource "oci_core_subnet" "ubuntu_subnet" {
     oci_core_security_list.egress_rule.id,
     oci_core_security_list.ingress_icmp.id,
     oci_core_security_list.ingress_ssh.id,
+    oci_core_security_list.ingress_minecraft.id,
   ]
 }
 
