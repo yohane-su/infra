@@ -9,6 +9,11 @@ terraform {
       source  = "cloudflare/cloudflare"
       version = "3.5.0"
     }
+
+    github = {
+      source  = "integrations/github"
+      version = "4.19.0"
+    }
   }
 }
 
@@ -26,4 +31,11 @@ provider "cloudflare" {
 
 data "cloudflare_zone" "yohanesu" {
   name = "yohane.su"
+}
+
+provider "github" {
+  owner = "yohane-su"
+
+  # https://registry.terraform.io/providers/integrations/github/latest/docs#github-app-installation
+  app_auth {}
 }
