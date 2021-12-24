@@ -19,7 +19,7 @@ resource "github_team" "infra_admin" {
 # team membership
 
 resource "github_team_membership" "infra_admin_sksat" {
-  team_id  = github_team.infra.id
+  team_id  = github_team.infra_admin.id
   username = "sksat"
   role     = "maintainer"
 }
