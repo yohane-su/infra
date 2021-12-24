@@ -13,7 +13,7 @@ resource "github_team" "infra_admin" {
   parent_team_id = github_team.infra.id
   name           = "infra-admin"
   description    = "infra admin"
-  privacy        = "secret"
+  privacy        = "closed"
 }
 
 # team membership
