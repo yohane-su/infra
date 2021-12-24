@@ -6,6 +6,7 @@ locals {
   ]
   users_craft_dev = [
     "sksat",
+    "kory33",
   ]
   users_crafter = [
   ]
