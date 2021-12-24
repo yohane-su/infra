@@ -16,6 +16,19 @@ resource "github_team" "infra_admin" {
   privacy        = "closed"
 }
 
+resource "github_team" "crafter" {
+  name        = "crafter"
+  description = "Minecraft player"
+  privacy     = "closed"
+}
+
+resource "github_team" "craft_dev" {
+  parent_team_id = github_team.crafter.id
+  name           = "craft-dev"
+  description    = "Minecraft developer"
+  privacy        = "closed"
+}
+
 # team membership
 
 resource "github_team_membership" "infra_admin_sksat" {
