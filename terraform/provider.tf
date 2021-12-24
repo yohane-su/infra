@@ -34,6 +34,8 @@ data "cloudflare_zone" "yohanesu" {
 }
 
 provider "github" {
+  owner = "yohane-su"
+
   # https://registry.terraform.io/providers/integrations/github/latest/docs#github-app-installation
   app_auth {}
 }
