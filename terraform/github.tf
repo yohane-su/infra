@@ -12,6 +12,14 @@ locals {
   ]
 }
 
+# repository
+resource "github_repository" "test" {
+  name        = "test"
+  description = "test repo"
+
+  visibility = "public"
+}
+
 # team
 ## https://docs.github.com/ja/rest/reference/teams#create-a-team--parameters
 ##   privacy=secret: only visible to organization owners and members of this team.
