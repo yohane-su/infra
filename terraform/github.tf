@@ -9,6 +9,7 @@ locals {
     "kory33",
   ]
   users_crafter = [
+    "sozysozbot"
   ]
 }
 
