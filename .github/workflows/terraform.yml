@@ -28,6 +28,10 @@ jobs:
           reporter: github-pr-review
           fail_on_error: true
 
+      - name: init
+        working-directory: terraform
+        run: terraform init -backend=false
+
       - name: validate
         working-directory: terraform
         run: terraform validate
