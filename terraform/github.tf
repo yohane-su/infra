@@ -18,6 +18,10 @@ resource "github_repository" "test" {
   description = "test repo"
 
   visibility = "public"
+
+  allow_merge_commit = true
+  allow_rebase_merge = true
+  allow_squash_merge = true
 }
 
 # team
@@ -74,7 +78,7 @@ resource "github_team_membership" "craft_dev" {
 
   for_each = toset(local.users_craft_dev)
   username = each.value
-  role     = "member"
+  role     = each.value == "sksat" ? "maintainer" : "member"
 }
 
 resource "github_team_membership" "crafter" {
