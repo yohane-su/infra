@@ -27,3 +27,15 @@ jobs:
           github_token: ${{ secrets.GITHUB_TOKEN }}
           reporter: github-pr-review
           fail_on_error: true
+
+      - name: init
+        working-directory: terraform
+        run: terraform init -backend=false
+
+      - name: validate
+        working-directory: terraform
+        run: terraform validate
+        env:
+          GITHUB_APP_ID: 123456
+          GITHUB_APP_INSTALLATION_ID: 12345678
+          GITHUB_APP_PEM_FILE: "\n"
