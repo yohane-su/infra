@@ -2,12 +2,14 @@ name: terraform plan
 
 on:
   pull_request:
+    types: [labeled]
     paths:
       - '.github/workflows/terraform-plan.yml'
       - 'terraform/**'
 
 jobs:
-  terraform:
+  terraform_plan:
+    if: contains(github.event.pull_request.labels.*.name, 'ok to plan')
     runs-on: ubuntu-latest
 
     steps:
