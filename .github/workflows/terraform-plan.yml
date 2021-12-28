@@ -1,0 +1,50 @@
+name: terraform plan
+
+on:
+  pull_request_target:
+    types: [labeled]
+    paths:
+      - '.github/workflows/terraform-plan.yml'
+      - 'terraform/**'
+
+jobs:
+  terraform_plan:
+    if: contains(github.event.pull_request.labels.*.name, 'ok to plan')
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@v2
+
+      - uses: hashicorp/setup-terraform@v1.3.2
+        with:
+          terraform_version: 1.0.11
+          cli_config_credentials_token: ${{ secrets.TF_API_TOKEN }}
+
+      - name: init
+        working-directory: terraform
+        run: terraform init
+
+      - name: plan
+        id: plan
+        continue-on-error: true
+        working-directory: terraform
+        run: |
+          terraform plan -no-color > plan.log
+          plan_link="$(grep 'https://app.terraform.io/app/sksat/yohanesu-infra/runs/run-' < plan.log)"
+          echo "::set-output name=plan_link::${plan_link}"
+
+      - name: comment plan link
+        uses: actions/github-script@v5.0.0
+        env:
+          PLAN_LINK: ${{ steps.plan.outputs.plan_link }}
+        with:
+          github-token: ${{ secrets.GITHUB_TOKEN }}
+          script: |
+            const body = `To view this run in a browser, visit:
+            ${process.env.PLAN_LINK}`;
+            github.rest.issues.createComment({
+              issue_number: context.issue.number,
+              owner: context.repo.owner,
+              repo: context.repo.repo,
+              body: body
+            })
