@@ -1,7 +1,7 @@
 name: terraform plan
 
 on:
-  pull_request:
+  pull_request_target:
     types: [labeled]
     paths:
       - '.github/workflows/terraform-plan.yml'
