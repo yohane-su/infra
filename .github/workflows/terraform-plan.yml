@@ -23,5 +23,26 @@ jobs:
         run: terraform init
 
       - name: plan
+        id: plan
+        continue-on-error: true
         working-directory: terraform
-        run: terraform plan
+        run: |
+          terraform plan -no-color > plan.log
+          plan_link="$(grep 'https://app.terraform.io/app/sksat/yohanesu-infra/runs/run-' < plan.log)"
+          echo "::set-output name=plan_link::${plan_link}"
+
+      - name: comment plan link
+        uses: actions/github-script@v5.0.0
+        env:
+          PLAN_LINK: ${{ steps.plan.outputs.plan_link }}
+        with:
+          github-token: ${{ secrets.GITHUB_TOKEN }}
+          script: |
+            const body = `To view this run in a browser, visit:
+            ${process.env.PLAN_LINK}`;
+            github.rest.issues.createComment({
+              issue_number: context.issue.number,
+              owner: context.repo.owner,
+              repo: context.repo.repo,
+              body: body
+            })
