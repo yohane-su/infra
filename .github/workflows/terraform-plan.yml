@@ -7,6 +7,9 @@ on:
       - '.github/workflows/terraform-plan.yml'
       - 'terraform/**'
 
+permissions:
+  contents: read
+
 jobs:
   terraform_plan:
     if: contains(github.event.pull_request.labels.*.name, 'ok to plan')
