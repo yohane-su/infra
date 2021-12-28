@@ -22,7 +22,7 @@ jobs:
         run: terraform fmt -check -recursive
 
       - name: tflint with reviewdog
-        uses: reviewdog/action-tflint@v1.13.0
+        uses: reviewdog/action-tflint@v1.14.0
         with:
           github_token: ${{ secrets.GITHUB_TOKEN }}
           reporter: github-pr-review
