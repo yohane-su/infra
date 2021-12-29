@@ -7,5 +7,5 @@ terraform {
     }
   }
 
-  required_version = "${file(.terraform-version)}"
+  required_version = "1.1.2"
 }
