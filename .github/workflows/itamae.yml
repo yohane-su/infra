@@ -1,0 +1,40 @@
+name: itamae
+
+on:
+  pull_request:
+    paths:
+      - '.github/workflows/itamae.yml'
+      - 'itamae/**'
+
+jobs:
+  itamae:
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@v2
+
+      - name: setup itamae
+        uses:  ruby/setup-ruby@v1
+        with:
+          ruby-version: 3.1.0
+          working-directory: itamae
+          bundler-cache: true
+
+      - name: cache vagrant box
+        uses: actions/cache@v2
+        with:
+          path: ~/.vagrant.d/boxes
+          key: ${{ runner.os }}-vagrant-${{ hashFiles('itamae/Vagrantfile') }}
+          restore-keys: |
+            ${{ runner.os }}-vagrant-
+
+      - name: start VM for itamae test
+        working-directory: itamae
+        run: vagrant up
+
+      - name: itamae
+        working-directory: itamae
+        env:
+          COMPOSE_CD_DISCORD_WEBHOOK: 'hoge'
+        run: |
+          bundle exec itamae ssh --vagrant roles/e2-micro.rb
