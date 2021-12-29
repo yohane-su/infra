@@ -34,7 +34,7 @@ template "/etc/compose-cd/config" do
   variables(
     search_root: COMPOSE_CD_ROOT,
     git_pull_user: "ubuntu",
-    discord_webhook: ""
+    discord_webhook: ENV["COMPOSE_CD_DISCORD_WEBHOOK"]
   )
 end
 
