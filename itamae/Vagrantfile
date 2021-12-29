@@ -1,3 +1,10 @@
+bootstrap = <<SCRIPT
+  useradd -m ubuntu --groups sudo -p vagrant
+  cp -r /home/vagrant/.ssh /home/ubuntu/
+SCRIPT
+
 Vagrant.configure("2") do |config|
   config.vm.box = "generic/ubuntu2004"
+  config.vm.provision "shell", inline: "#{bootstrap}", privileged: true
+  #config.ssh.username = "ubuntu"
 end
