@@ -6,4 +6,6 @@ terraform {
       name = "yohanesu-infra"
     }
   }
+
+  required_version = "${file(.terraform-version)}"
 }
