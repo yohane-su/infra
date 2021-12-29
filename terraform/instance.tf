@@ -120,6 +120,6 @@ resource "oci_core_instance" "x86_test_instance" {
   is_pv_encryption_in_transit_enabled = "true"
 
   metadata = {
-    "ssh_authorized_keys" = "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIAs3X141dqN0IgcRzUo/0j1XVmy5/BcDD8RrXwygxdaX sksat@yohanesu"
+    "ssh_authorized_keys" = "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIHok4ZTNedzhH/shFDS6MlViYG/oEBK7KERycf+/glS2 actions@github"
   }
 }
