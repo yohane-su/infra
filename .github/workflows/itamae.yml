@@ -35,6 +35,6 @@ jobs:
       - name: itamae
         working-directory: itamae
         env:
-          COMPOSE_CD_DISCORD_WEBHOOK: 'hoge'
+          COMPOSE_CD_DISCORD_WEBHOOK: ${{ secrets.COMPOSE_CD_WEBHOOK_TEST }}
         run: |
           bundle exec itamae ssh --vagrant roles/e2-micro.rb
