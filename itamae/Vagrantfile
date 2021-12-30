@@ -2,6 +2,7 @@ bootstrap = <<SCRIPT
   useradd -m ubuntu --groups sudo -p vagrant -s /bin/bash
   echo -e "vagrant\nvagrant\n" | passwd ubuntu
   cp -r /home/vagrant/.ssh /home/ubuntu/
+  chown ubuntu:ubuntu /home/ubuntu/.ssh
 SCRIPT
 
 Vagrant.configure("2") do |config|
