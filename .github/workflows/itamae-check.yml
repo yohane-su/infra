@@ -1,13 +1,13 @@
-name: itamae
+name: itamae check
 
 on:
   pull_request:
     paths:
-      - '.github/workflows/itamae.yml'
+      - '.github/workflows/itamae-check.yml'
       - 'itamae/**'
 
 jobs:
-  itamae:
+  itamae_check:
     runs-on: macos-10.15
 
     steps:
