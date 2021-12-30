@@ -11,20 +11,21 @@ http_request "#{HOME_DIR}/.ssh/sksat.keys" do
   url "https://github.com/sksat.keys"
 end
 
-remote_file "deploy.keys" do
+remote_file "#{HOME_DIR}/.ssh/deploy.keys" do
   owner "ubuntu"
-  cwd "#{HOME_DIR}/.ssh"
   source "../../../deploy.pub"
 end
-
-merged_keys = run_command("cat #{HOME_DIR}/.ssh/authorized_keys").stdout
-merged_keys+= run_command("cat #{HOME_DIR}/.ssh/deploy.keys").stdout
-merged_keys+= run_command("cat #{HOME_DIR}/.ssh/sksat.keys").stdout
-merged_keys = merged_keys.split("\n").uniq.join("\n") + "\n"
 
 file "#{HOME_DIR}/.ssh/authorized_keys" do
   action :create
   mode "600"
   cwd "#{HOME_DIR}/.ssh"
-  content merged_keys
+  block do |content|
+    merged_keys = run_command("cat #{HOME_DIR}/.ssh/authorized_keys").stdout
+    merged_keys +=run_command("cat #{HOME_DIR}/.ssh/deploy.keys").stdout
+    merged_keys +=run_command("cat #{HOME_DIR}/.ssh/sksat.keys").stdout
+    merged_keys = merged_keys.split("\n").uniq.join("\n") + "\n"
+
+    content = merged_keys
+  end
 end
