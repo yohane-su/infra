@@ -13,6 +13,12 @@ execute "checkout master" do
   command "git switch master"
 end
 
+# prepare cloudflared credential
+remote_file "cloudflared/cert.pem" do
+  sensitive true
+  cwd SRV_DIR
+end
+
 execute "start ob-server" do
   cwd SRV_DIR
   command "docker-compose up -d"
