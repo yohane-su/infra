@@ -32,6 +32,10 @@ jobs:
         working-directory: itamae
         run: vagrant up
 
+      - name: prepare cloudflare credential(mock)
+        working-directory: itamae/cookbooks/ob-server/files
+        run: echo "hogefuga" > cert.pem
+
       - name: itamae
         working-directory: itamae
         env:
