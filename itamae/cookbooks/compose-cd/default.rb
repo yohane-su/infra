@@ -1,7 +1,6 @@
 COMPOSE_CD_ROOT='/home/ubuntu/srv'
 
-package 'docker'
-package 'docker-compose'
+include_recipe "../docker-compose"
 
 git "/opt/compose-cd" do
   repository "https://github.com/sksat/compose-cd.git"
