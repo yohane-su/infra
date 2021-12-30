@@ -38,7 +38,9 @@ template "/etc/compose-cd/config" do
 end
 
 # compose-cd root
-directory COMPOSE_CD_ROOT
+directory COMPOSE_CD_ROOT do
+  user "ubuntu"
+end
 
 # start services
 service 'compose-cd.timer' do

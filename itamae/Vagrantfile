@@ -1,5 +1,6 @@
 bootstrap = <<SCRIPT
-  useradd -m ubuntu --groups sudo -p vagrant
+  useradd -m ubuntu --groups sudo -p vagrant -s /bin/bash
+  echo -e "vagrant\nvagrant\n" | passwd ubuntu
   cp -r /home/vagrant/.ssh /home/ubuntu/
 SCRIPT
 
