@@ -1,8 +1,11 @@
+itamae_pubkey=`cat ../deploy.pub`
+
 bootstrap = <<SCRIPT
   useradd -m ubuntu --groups sudo -p vagrant -s /bin/bash
   echo -e "vagrant\nvagrant\n" | passwd ubuntu
   cp -r /home/vagrant/.ssh /home/ubuntu/
   chown ubuntu:ubuntu /home/ubuntu/.ssh
+  echo #{itamae_pubkey} >> /home/ubuntu/.ssh/authorized_keys
 SCRIPT
 
 Vagrant.configure("2") do |config|

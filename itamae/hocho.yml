@@ -1,0 +1,14 @@
+inventory_providers:
+  file:
+    path: './hosts'
+
+property_providers:
+  - add_default:
+      properties:
+        preferred_driver: mitamae
+
+driver_options:
+  mitamae:
+    mitamae_prepare_script: |
+      wget -O /usr/local/bin/mitamae https://github.com/itamae-kitchen/mitamae/releases/download/v1.12.8/mitamae-x86_64-linux;
+      chmod +x /usr/local/bin/mitamae

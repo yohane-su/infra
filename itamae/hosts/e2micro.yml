@@ -1,0 +1,10 @@
+127.0.0.1:
+  ssh_options:
+    user: ubuntu
+    password: vagrant
+    port: 2222
+    keys:
+      - ../hoge
+  properties:
+    run_list:
+      - roles/e2-micro.rb

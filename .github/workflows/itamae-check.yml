@@ -40,5 +40,6 @@ jobs:
         working-directory: itamae
         env:
           COMPOSE_CD_DISCORD_WEBHOOK: ${{ secrets.COMPOSE_CD_WEBHOOK_TEST }}
+          SUDO_PASSWORD: vagrant
         run: |
-          bundle exec itamae ssh --vagrant roles/e2-micro.rb
+          bundle exec hocho apply 127.0.0.1
