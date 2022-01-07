@@ -32,6 +32,11 @@ jobs:
         working-directory: itamae
         run: vagrant up
 
+      - name: prepare known_hosts
+        run: |
+          echo -n "[127.0.0.1]:2222 " >> ~/.ssh/known_hosts
+          cat deploy.pub >> ~/.ssh/known_hosts
+
       - name: prepare cloudflare credential(mock)
         working-directory: itamae/cookbooks/ob-server/files
         run: echo "hogefuga" > cert.pem
