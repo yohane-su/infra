@@ -1,10 +1,12 @@
 127.0.0.1:
   ssh_options:
+    host_key:
+      - ssh-ed25519
     user: ubuntu
-    password: vagrant
     port: 2222
     keys:
-      - ../hoge
+      - ./key
+    passphrase: vagrant
   properties:
     run_list:
       - roles/e2-micro.rb

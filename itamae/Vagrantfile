@@ -5,11 +5,19 @@ bootstrap = <<SCRIPT
   echo -e "vagrant\nvagrant\n" | passwd ubuntu
   cp -r /home/vagrant/.ssh /home/ubuntu/
   chown ubuntu:ubuntu /home/ubuntu/.ssh
-  echo #{itamae_pubkey} >> /home/ubuntu/.ssh/authorized_keys
+  chown ubuntu:ubuntu /home/ubuntu/.ssh/authorized_keys
+  chmod 777 /home/ubuntu/.ssh/authorized_keys
+  echo "#{itamae_pubkey}" >> /home/ubuntu/.ssh/authorized_keys
+  chmod 600 /home/ubuntu/.ssh/authorized_keys
+SCRIPT
+
+setup_key = <<SCRIPT
+  echo "#{itamae_pubkey}" >> ~/.ssh/authorized_keys
 SCRIPT
 
 Vagrant.configure("2") do |config|
   config.vm.box = "generic/ubuntu2004"
   config.vm.provision "shell", inline: "#{bootstrap}", privileged: true
+  config.vm.provision "shell", inline: "#{setup_key}", privileged: false
   #config.ssh.username = "ubuntu"
 end
