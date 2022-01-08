@@ -30,7 +30,10 @@ jobs:
 
       - name: start VM for itamae test
         working-directory: itamae
-        run: vagrant up
+        run: |
+          vagrant up
+          vagrant ssh-config
+          vagrant ssh
 
       - name: prepare known_hosts
         run: |
