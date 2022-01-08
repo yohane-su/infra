@@ -5,7 +5,7 @@
     host_key:
       - ssh-ed25519
     user: ubuntu
-    port: 2222
+    port: 12222
     keys:
       - ./key
     passphrase: vagrant
