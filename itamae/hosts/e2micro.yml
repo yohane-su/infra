@@ -1,5 +1,7 @@
 127.0.0.1:
   ssh_options:
+    auth_methods:
+      - publickey
     host_key:
       - ssh-ed25519
     user: ubuntu
@@ -7,6 +9,7 @@
     keys:
       - ./key
     passphrase: vagrant
+    verify_host_key: accept_new
   properties:
     run_list:
       - roles/e2-micro.rb
