@@ -10,7 +10,7 @@
       - ./key
     passphrase: vagrant
     # そうか？(ref: https://github.com/sorah/hocho/blob/2b4d883a1711d8c7997ed0af5c4aae7728d1c941/lib/hocho/host.rb#L171-L177)
-    verify_host_key: :accept_new
+    verify_host_key: :never
   properties:
     run_list:
       - roles/e2-micro.rb
