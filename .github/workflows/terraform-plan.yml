@@ -47,7 +47,7 @@ jobs:
           echo "::set-output name=plan_link::${plan_link}"
 
       - name: comment plan link
-        uses: actions/github-script@v6.0.0
+        uses: actions/github-script@v6.1.0
         env:
           PLAN_LINK: ${{ steps.plan.outputs.plan_link }}
         with:
