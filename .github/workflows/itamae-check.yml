@@ -1,0 +1,53 @@
+name: itamae check
+
+on:
+  pull_request:
+    paths:
+      - '.github/workflows/itamae-check.yml'
+      - 'itamae/**'
+
+jobs:
+  itamae_check:
+    runs-on: macos-10.15
+
+    steps:
+      - uses: actions/checkout@v2
+
+      - name: setup itamae
+        uses:  ruby/setup-ruby@v1
+        with:
+          ruby-version: 3.1.0
+          working-directory: itamae
+          bundler-cache: true
+
+      - name: cache vagrant box
+        uses: actions/cache@v2
+        with:
+          path: ~/.vagrant.d/boxes
+          key: ${{ runner.os }}-vagrant-${{ hashFiles('itamae/Vagrantfile') }}
+          restore-keys: |
+            ${{ runner.os }}-vagrant-
+
+      - name: start VM for itamae test
+        working-directory: itamae
+        run: |
+          vagrant up
+          vagrant ssh-config
+          vagrant ssh
+
+      - name: prepare known_hosts
+        run: |
+          echo -n "[127.0.0.1]:2222 " >> ~/.ssh/known_hosts
+          cat deploy.pub >> ~/.ssh/known_hosts
+
+      - name: prepare cloudflare credential(mock)
+        working-directory: itamae/cookbooks/ob-server/files
+        run: echo "hogefuga" > cert.pem
+
+      - name: itamae
+        working-directory: itamae
+        env:
+          COMPOSE_CD_DISCORD_WEBHOOK: ${{ secrets.COMPOSE_CD_WEBHOOK_TEST }}
+          SUDO_PASSWORD: vagrant
+        run: |
+          bundle exec hocho apply 127.0.0.1

@@ -1,0 +1,16 @@
+127.0.0.1:
+  ssh_options:
+    auth_methods:
+      - publickey
+    host_key:
+      - ssh-ed25519
+    user: ubuntu
+    port: 12222
+    keys:
+      - ./key
+    passphrase: vagrant
+    # そうか？(ref: https://github.com/sorah/hocho/blob/2b4d883a1711d8c7997ed0af5c4aae7728d1c941/lib/hocho/host.rb#L171-L177)
+    verify_host_key: :never
+  properties:
+    run_list:
+      - roles/e2-micro.rb
