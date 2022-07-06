@@ -56,7 +56,7 @@ resource "oci_core_security_list" "ingress_ssh" {
   }
 }
 
-resource "oci_core_security_list" "ingress_http" {
+resource "oci_core_security_list" "ingress_web" {
   compartment_id = var.OCID_COMPARTMENT
   vcn_id         = oci_core_vcn.ubuntu_vcn.id
 
@@ -71,12 +71,6 @@ resource "oci_core_security_list" "ingress_http" {
       max = 80
     }
   }
-}
-
-resource "oci_core_security_list" "ingress_https" {
-  compartment_id = var.OCID_COMPARTMENT
-  vcn_id         = oci_core_vcn.ubuntu_vcn.id
-
   ingress_security_rules {
     protocol    = "6"
     source_type = "CIDR_BLOCK"
