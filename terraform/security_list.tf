@@ -56,6 +56,23 @@ resource "oci_core_security_list" "ingress_ssh" {
   }
 }
 
+resource "oci_core_security_list" "ingress_http" {
+  compartment_id = var.OCID_COMPARTMENT
+  vcn_id         = oci_core_vcn.ubuntu_vcn.id
+
+  ingress_security_rules {
+    protocol    = "6"
+    source_type = "CIDR_BLOCK"
+    source      = "0.0.0.0/0"
+    stateless   = false
+
+    tcp_options {
+      min = 80
+      max = 80
+    }
+  }
+}
+
 resource "oci_core_security_list" "ingress_minecraft" {
   compartment_id = var.OCID_COMPARTMENT
   vcn_id         = oci_core_vcn.ubuntu_vcn.id
